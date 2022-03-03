@@ -31,3 +31,53 @@ const getMax = (arr) => {
 console.log(getMax(inputArr));
 
 // // // // // // // // // // // //
+//1
+const recFun = (input) => {
+	Object.keys(input).forEach((item) => {
+		if (typeof input[item] === "object") {
+			if (Array.isArray(input[item])) {
+				input[item].forEach((i) => {
+					recFun(i);
+				});
+			} else {
+				recFun(input[item]);
+			}
+		} else if (typeof input[item] === "string") {
+			input[item] = input[item].toUpperCase();
+		}
+	});
+	return input;
+};
+
+//2
+const string = "a:2,b:3,c:4,a:5,b:6";
+const a = {};
+string.split(",").forEach((item) => {
+	const tempArr = item.split(":");
+	if (a[tempArr[0]]) {
+		a[tempArr[0]] = a[tempArr[0]] + parseInt(tempArr[1], 10);
+	} else {
+		a[tempArr[0]] = parseInt(tempArr[1], 10);
+	}
+});
+
+console.log(a);
+
+//3
+const string2 = "{[({})]}";
+
+if (string2.length % 2 !== 0) {
+	console.log(`invalid`);
+} else {
+	let left = string2.slice(0, string2.length / 2);
+	let right = string2
+		.slice(string2.length / 2)
+		.split("")
+		.reverse()
+		.join("")
+		.replaceAll(")", "(")
+		.replaceAll("}", "{")
+		.replaceAll("]", "[");
+	if (left === right) console.log(`valid`);
+	else console.log(`invalid`);
+}
