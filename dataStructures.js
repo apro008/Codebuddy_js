@@ -31,6 +31,7 @@ const getMax = (arr) => {
 console.log(getMax(inputArr));
 
 // // // // // // // // // // // //
+// level {3}
 //1
 const recFun = (input) => {
 	Object.keys(input).forEach((item) => {
